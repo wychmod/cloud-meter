@@ -22,7 +22,7 @@ public class ProjectController {
      * @return 包含项目列表的Json格式化对象
      */
     @GetMapping ("/list")
-    public Object list() {
+    public JsonFormatter list() {
         return JsonFormatter.buildSuccess(projectService.list());
     }
 
@@ -33,7 +33,7 @@ public class ProjectController {
      * @return 包含保存结果的Json格式化对象
      */
     @PostMapping ("/save")
-    public Object save(@RequestBody ProjectSaveReq req) {
+    public JsonFormatter save(@RequestBody ProjectSaveReq req) {
         return JsonFormatter.buildSuccess(projectService.save(req));
     }
 
@@ -44,7 +44,7 @@ public class ProjectController {
      * @return 包含更新结果的Json格式化对象
      */
     @PostMapping ("/update")
-    public Object update(@RequestBody ProjectUpdateReq req) {
+    public JsonFormatter update(@RequestBody ProjectUpdateReq req) {
         return JsonFormatter.buildSuccess(projectService.update(req));
     }
 
@@ -55,7 +55,7 @@ public class ProjectController {
      * @return 包含删除结果的Json格式化对象
      */
     @DeleteMapping ("/del")
-    public Object delete(@RequestBody ProjectDelReq req) {
+    public JsonFormatter delete(@RequestBody ProjectDelReq req) {
         return JsonFormatter.buildSuccess(projectService.delete(req.getId()));
     }
 }
