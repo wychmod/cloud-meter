@@ -34,8 +34,12 @@ public class StressTestUtil {
     }
 
     /**
-     * 初始化JMeter属性
+     * 初始化JMeter属性 此处为1
      * 该方法通过加载JMeter的配置文件并设置一些基本属性来初始化JMeter环境
+     * 1. 环境初始化
+     * 2. 测试脚本
+     * 3. 用例执行
+     * 4. 结果收集
      */
     public static void initJmeterProperties() {
         String jmeterHomeBin = getJmeterHomeBin();

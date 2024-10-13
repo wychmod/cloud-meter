@@ -7,9 +7,18 @@ package com.wychmod.enums;
  */
 public enum ReportTypeEnum {
 
+    /**
+     * STRESS: 代表用于压力测试的模式
+     */
     STRESS,
 
+    /**
+     * API: 代表用于API接口测试的模式
+     */
     API,
 
+    /**
+     * UI: 代表用于UI自动化测试的模式
+     */
     UI
 }
