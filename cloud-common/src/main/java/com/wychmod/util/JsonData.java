@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JsonFormatter {
+public class JsonData {
 
     /**
      * 状态码
@@ -43,8 +43,8 @@ public class JsonFormatter {
      * 成功，不传入数据
      * @return
      */
-    public static JsonFormatter buildSuccess() {
-        return new JsonFormatter(0, null, null);
+    public static JsonData buildSuccess() {
+        return new JsonData(0, null, null);
     }
 
     /**
@@ -52,8 +52,8 @@ public class JsonFormatter {
      * @param data
      * @return
      */
-    public static JsonFormatter buildSuccess(Object data) {
-        return new JsonFormatter(0, data, null);
+    public static JsonData buildSuccess(Object data) {
+        return new JsonData(0, data, null);
     }
 
     /**
@@ -61,8 +61,8 @@ public class JsonFormatter {
      * @param msg
      * @return
      */
-    public static JsonFormatter buildError(String msg) {
-        return new JsonFormatter(-1, null, msg);
+    public static JsonData buildError(String msg) {
+        return new JsonData(-1, null, msg);
     }
 
     /**
@@ -71,8 +71,8 @@ public class JsonFormatter {
      * @param msg
      * @return
      */
-    public static JsonFormatter buildCodeAndMsg(int code, String msg) {
-        return new JsonFormatter(code, null, msg);
+    public static JsonData buildCodeAndMsg(int code, String msg) {
+        return new JsonData(code, null, msg);
     }
 
     /**
@@ -80,8 +80,8 @@ public class JsonFormatter {
      * @param codeEnum
      * @return
      */
-    public static JsonFormatter buildResult(BizCodeEnum codeEnum){
-        return JsonFormatter.buildCodeAndMsg(codeEnum.getCode(),codeEnum.getMessage());
+    public static JsonData buildResult(BizCodeEnum codeEnum){
+        return JsonData.buildCodeAndMsg(codeEnum.getCode(),codeEnum.getMessage());
     }
 
     public  boolean isSuccess(){

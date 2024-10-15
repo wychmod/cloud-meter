@@ -2,7 +2,9 @@ package com.wychmod.exception;
 
 import com.wychmod.enums.BizCodeEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class BizException extends RuntimeException{
     private int code;

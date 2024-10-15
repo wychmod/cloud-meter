@@ -5,7 +5,7 @@ import com.wychmod.req.stress.StressCaseReq;
 import com.wychmod.req.stress.StressCaseSaveReq;
 import com.wychmod.req.stress.StressCaseUpdateReq;
 import com.wychmod.service.stress.StressCaseService;
-import com.wychmod.util.JsonFormatter;
+import com.wychmod.util.JsonData;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +29,8 @@ public class StressCaseController {
      * @return 返回查询到的用例信息
      */
     @RequestMapping("find")
-    public JsonFormatter findById(@RequestParam("projectId") Long projectId, @RequestParam("caseId") Long caseId){
-        return JsonFormatter.buildSuccess(stressCaseService.findById(projectId,caseId));
+    public JsonData findById(@RequestParam("projectId") Long projectId, @RequestParam("caseId") Long caseId){
+        return JsonData.buildSuccess(stressCaseService.findById(projectId,caseId));
     }
 
     /**
@@ -40,8 +40,8 @@ public class StressCaseController {
      * @return 返回删除成功的信息
      */
     @PostMapping("/del")
-    public JsonFormatter delete(@RequestBody StressCaseReq stressCaseReq){
-        return JsonFormatter.buildSuccess(stressCaseService.delete(stressCaseReq.getId(),stressCaseReq.getProjectId()));
+    public JsonData delete(@RequestBody StressCaseReq stressCaseReq){
+        return JsonData.buildSuccess(stressCaseService.delete(stressCaseReq.getId(),stressCaseReq.getProjectId()));
     }
 
     /**
@@ -51,8 +51,8 @@ public class StressCaseController {
      * @return 返回保存成功的信息
      */
     @PostMapping("/save")
-    public JsonFormatter save(@RequestBody StressCaseSaveReq stressCaseSaveReq){
-        return JsonFormatter.buildSuccess(stressCaseService.save(stressCaseSaveReq));
+    public JsonData save(@RequestBody StressCaseSaveReq stressCaseSaveReq){
+        return JsonData.buildSuccess(stressCaseService.save(stressCaseSaveReq));
     }
 
     /**
@@ -62,8 +62,8 @@ public class StressCaseController {
      * @return 返回更新成功的信息
      */
     @PostMapping("/update")
-    public JsonFormatter update(@RequestBody StressCaseUpdateReq stressCaseUpdateReq){
-        return JsonFormatter.buildSuccess(stressCaseService.update(stressCaseUpdateReq));
+    public JsonData update(@RequestBody StressCaseUpdateReq stressCaseUpdateReq){
+        return JsonData.buildSuccess(stressCaseService.update(stressCaseUpdateReq));
     }
 
     /**
@@ -74,8 +74,8 @@ public class StressCaseController {
      * @return 返回执行成功的信息
      */
     @GetMapping("/execute")
-    public JsonFormatter execute(@RequestParam("projectId") Long projectId,@RequestParam("id") Long caseId){
+    public JsonData execute(@RequestParam("projectId") Long projectId, @RequestParam("id") Long caseId){
         stressCaseService.execute(projectId,caseId);
-        return JsonFormatter.buildSuccess();
+        return JsonData.buildSuccess();
     }
 }

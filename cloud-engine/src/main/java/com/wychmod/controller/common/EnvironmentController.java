@@ -4,7 +4,7 @@ import com.wychmod.req.common.EnvironmentDelReq;
 import com.wychmod.req.common.EnvironmentSaveReq;
 import com.wychmod.req.common.EnvironmentUpdateReq;
 import com.wychmod.service.common.EnvironmentService;
-import com.wychmod.util.JsonFormatter;
+import com.wychmod.util.JsonData;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +26,8 @@ public class EnvironmentController {
      * @return 返回包含环境列表的JsonFormatter对象
      */
     @GetMapping("/list")
-    public JsonFormatter list(@RequestParam("projectId") Long projectId){
-        return JsonFormatter.buildSuccess(environmentService.list(projectId));
+    public JsonData list(@RequestParam("projectId") Long projectId){
+        return JsonData.buildSuccess(environmentService.list(projectId));
     }
 
     /**
@@ -36,8 +36,8 @@ public class EnvironmentController {
      * @return 返回表示操作成功的JsonFormatter对象
      */
     @PostMapping("/save")
-    public JsonFormatter save(@RequestBody EnvironmentSaveReq environmentSaveReq){
-        return JsonFormatter.buildSuccess(environmentService.save(environmentSaveReq));
+    public JsonData save(@RequestBody EnvironmentSaveReq environmentSaveReq){
+        return JsonData.buildSuccess(environmentService.save(environmentSaveReq));
     }
 
     /**
@@ -46,8 +46,8 @@ public class EnvironmentController {
      * @return 返回表示操作成功的JsonFormatter对象
      */
     @PostMapping("/update")
-    public JsonFormatter save(@RequestBody EnvironmentUpdateReq environmentUpdateReq){
-        return JsonFormatter.buildSuccess(environmentService.update(environmentUpdateReq));
+    public JsonData save(@RequestBody EnvironmentUpdateReq environmentUpdateReq){
+        return JsonData.buildSuccess(environmentService.update(environmentUpdateReq));
     }
 
     /**
@@ -56,7 +56,7 @@ public class EnvironmentController {
      * @return 返回表示操作成功的JsonFormatter对象
      */
     @PostMapping("/del ")
-    public JsonFormatter delete(@RequestBody EnvironmentDelReq environmentDelReq){
-        return JsonFormatter.buildSuccess(environmentService.delete(environmentDelReq.getId(),environmentDelReq.getProjectId()));
+    public JsonData delete(@RequestBody EnvironmentDelReq environmentDelReq){
+        return JsonData.buildSuccess(environmentService.delete(environmentDelReq.getId(),environmentDelReq.getProjectId()));
     }
 }

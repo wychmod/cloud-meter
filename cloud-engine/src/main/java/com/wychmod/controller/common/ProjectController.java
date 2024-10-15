@@ -5,7 +5,7 @@ import com.wychmod.req.common.ProjectDelReq;
 import com.wychmod.req.common.ProjectSaveReq;
 import com.wychmod.req.common.ProjectUpdateReq;
 import com.wychmod.service.common.ProjectService;
-import com.wychmod.util.JsonFormatter;
+import com.wychmod.util.JsonData;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +22,8 @@ public class ProjectController {
      * @return 包含项目列表的Json格式化对象
      */
     @GetMapping ("/list")
-    public JsonFormatter list() {
-        return JsonFormatter.buildSuccess(projectService.list());
+    public JsonData list() {
+        return JsonData.buildSuccess(projectService.list());
     }
 
     /**
@@ -33,8 +33,8 @@ public class ProjectController {
      * @return 包含保存结果的Json格式化对象
      */
     @PostMapping ("/save")
-    public JsonFormatter save(@RequestBody ProjectSaveReq req) {
-        return JsonFormatter.buildSuccess(projectService.save(req));
+    public JsonData save(@RequestBody ProjectSaveReq req) {
+        return JsonData.buildSuccess(projectService.save(req));
     }
 
     /**
@@ -44,8 +44,8 @@ public class ProjectController {
      * @return 包含更新结果的Json格式化对象
      */
     @PostMapping ("/update")
-    public JsonFormatter update(@RequestBody ProjectUpdateReq req) {
-        return JsonFormatter.buildSuccess(projectService.update(req));
+    public JsonData update(@RequestBody ProjectUpdateReq req) {
+        return JsonData.buildSuccess(projectService.update(req));
     }
 
     /**
@@ -55,7 +55,7 @@ public class ProjectController {
      * @return 包含删除结果的Json格式化对象
      */
     @DeleteMapping ("/del")
-    public JsonFormatter delete(@RequestBody ProjectDelReq req) {
-        return JsonFormatter.buildSuccess(projectService.delete(req.getId()));
+    public JsonData delete(@RequestBody ProjectDelReq req) {
+        return JsonData.buildSuccess(projectService.delete(req.getId()));
     }
 }

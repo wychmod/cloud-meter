@@ -3,7 +3,7 @@ package com.wychmod.controller;
 import com.wychmod.dto.ReportDTO;
 import com.wychmod.req.ReportSaveReq;
 import com.wychmod.service.ReportService;
-import com.wychmod.util.JsonFormatter;
+import com.wychmod.util.JsonData;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +23,8 @@ public class ReportController {
     private ReportService reportService;
 
     @PostMapping("/save")
-    public JsonFormatter save(@RequestBody ReportSaveReq req){
+    public JsonData save(@RequestBody ReportSaveReq req){
         ReportDTO reportDTO = reportService.save(req);
-        return  JsonFormatter.buildSuccess(reportDTO);
+        return  JsonData.buildSuccess(reportDTO);
     }
 }

@@ -1,12 +1,21 @@
 package com.wychmod.service.stress.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.wychmod.dto.ReportDTO;
 import com.wychmod.dto.stress.StressCaseDTO;
+import com.wychmod.enums.BizCodeEnum;
+import com.wychmod.enums.ReportStateEnum;
+import com.wychmod.enums.ReportTypeEnum;
+import com.wychmod.enums.StressSourceTypeEnum;
+import com.wychmod.exception.BizException;
+import com.wychmod.feign.ReportFeignService;
 import com.wychmod.mapper.StressCaseMapper;
 import com.wychmod.model.StressCaseDO;
+import com.wychmod.req.ReportSaveReq;
 import com.wychmod.req.stress.StressCaseSaveReq;
 import com.wychmod.req.stress.StressCaseUpdateReq;
 import com.wychmod.service.stress.StressCaseService;
+import com.wychmod.util.JsonData;
 import com.wychmod.util.SpringBeanUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -16,6 +25,9 @@ public class StressCaseServiceImpl implements StressCaseService {
 
     @Resource
     private StressCaseMapper stressCaseMapper;
+
+    @Resource
+    private ReportFeignService reportFeignService;
 
     @Override
     public StressCaseDTO findById(Long projectId, Long caseId) {
@@ -62,12 +74,45 @@ public class StressCaseServiceImpl implements StressCaseService {
      **/
     @Override
     public void execute(Long projectId, Long caseId) {
+        // 根据项目ID和测试用例ID查询测试用例信息
         LambdaQueryWrapper<StressCaseDO> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(StressCaseDO::getProjectId,projectId);
-        wrapper.eq(StressCaseDO::getId,caseId);
+        wrapper.eq(StressCaseDO::getProjectId, projectId);
+        wrapper.eq(StressCaseDO::getId, caseId);
         StressCaseDO stressCaseDO = stressCaseMapper.selectOne(wrapper);
+
+        // 如果找到对应的测试用例，则创建报告保存请求
         if (stressCaseDO != null) {
-            // 初始化测试报告 todo
+            ReportSaveReq reportSaveReq = ReportSaveReq.builder().projectId(stressCaseDO.getProjectId()).caseId(stressCaseDO.getId())
+                    .type(ReportTypeEnum.STRESS.name())
+                    .name(stressCaseDO.getName())
+                    .executeState(ReportStateEnum.EXECUTING.name())
+                    .startTime(System.currentTimeMillis())
+                    .build();
+
+            // 调用远程服务保存报告信息
+            JsonData jsonData = reportFeignService.save(reportSaveReq);
+
+            // 如果保存报告成功，则根据测试用例的类型运行相应的压力测试
+            if (jsonData.isSuccess()) {
+                ReportDTO reportDTO = jsonData.getData(ReportDTO.class);
+
+                // 根据测试用例的应力源类型，选择运行简单压力测试或JMX压力测试
+                if (StressSourceTypeEnum.SIMPLE.name().equalsIgnoreCase(stressCaseDO.getStressSourceType())) {
+                    runSimpleStressCase(stressCaseDO, reportDTO);
+                } else if (StressSourceTypeEnum.JMX.name().equalsIgnoreCase(stressCaseDO.getStressSourceType())) {
+                    runJmxStressCase(stressCaseDO, reportDTO);
+                } else {
+                    // 如果应力源类型不受支持，则抛出业务异常
+                    throw new BizException(BizCodeEnum.STRESS_UNSUPPORTED);
+                }
+            }
         }
+    }
+
+    private void runJmxStressCase(StressCaseDO stressCaseDO, ReportDTO reportDTO) {
+    }
+
+    private void runSimpleStressCase(StressCaseDO stressCaseDO, ReportDTO reportDTO) {
+
     }
 }
