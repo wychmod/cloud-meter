@@ -28,4 +28,9 @@ public class FileController {
     public JsonData upload(@RequestParam("file") MultipartFile file){
         return JsonData.buildSuccess(fileService.upload(file));
     }
+
+    @PostMapping("/get_temp_access_url")
+    public JsonData getTempAccessUrl(@RequestParam("remote_file_path") String remoteFilePath){
+        return JsonData.buildSuccess(fileService.getTempAccessFileUrl(remoteFilePath));
+    }
 }
