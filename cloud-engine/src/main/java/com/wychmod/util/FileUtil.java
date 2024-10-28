@@ -1,7 +1,12 @@
 package com.wychmod.util;
 
 import cn.hutool.core.lang.UUID;
+import cn.hutool.http.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 /**
  * @description:
@@ -19,5 +24,14 @@ public class FileUtil {
      */
     public static String getFileName(String fileName) {
         return System.currentTimeMillis() + "-" + UUID.fastUUID().toString() + "-" + fileName;
+    }
+
+    /**
+     * 从远程url获取文件内容
+     * @param urlStr 远程url
+     * @return 返回文件内容
+     */
+    public static String readRemoteUrl(String urlStr) {
+        return HttpUtil.get(urlStr);
     }
 }
