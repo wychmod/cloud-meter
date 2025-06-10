@@ -20,5 +20,10 @@ public enum ReportTypeEnum {
     /**
      * UI: 代表用于UI自动化测试的模式
      */
-    UI
+    UI,
+
+    /**
+     * ACCURACY: 代表用于准确度测试的模式
+     */
+    ACCURACY
 }
