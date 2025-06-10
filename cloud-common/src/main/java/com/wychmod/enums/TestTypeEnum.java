@@ -21,5 +21,10 @@ public enum TestTypeEnum {
     /**
      * UI代表用户界面测试类型，用于检查系统的用户界面是否按预期工作
      */
-    UI
+    UI,
+
+    /**
+     * ACCURACY代表准确性测试类型，用于评估系统的数据处理和计算结果是否正确
+     */
+    ACCURACY
 }

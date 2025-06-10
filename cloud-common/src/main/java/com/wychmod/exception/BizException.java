@@ -4,6 +4,11 @@ import com.wychmod.enums.BizCodeEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * @description: 自定义异常类
+ * @author: wychmod
+ * @date: 2023/6/30
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class BizException extends RuntimeException{

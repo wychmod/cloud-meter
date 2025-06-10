@@ -11,6 +11,7 @@ public enum StressSourceTypeEnum {
      * 在线自定义;
      */
     SIMPLE,
+
     /**
      * 在线上传jmx脚本;
      */
