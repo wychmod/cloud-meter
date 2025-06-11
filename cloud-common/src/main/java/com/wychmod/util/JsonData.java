@@ -14,12 +14,13 @@ public class JsonData {
     /**
      * 状态码
      */
-
     private Integer code;
+
     /**
      * 数据
      */
     private Object data;
+
     /**
      * 描述
      */
@@ -27,7 +28,6 @@ public class JsonData {
 
     /**
      * 根据提供的类型引用获取对应类型的数据
-     *
      * 本方法使用JSON库将内部存储的数据序列化为JSON字符串，然后将该字符串解析为由typeReference参数指定的类型
      * 这种设计模式常用于处理需要在不同类型间转换数据的场景
      *

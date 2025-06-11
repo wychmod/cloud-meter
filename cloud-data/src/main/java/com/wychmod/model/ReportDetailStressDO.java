@@ -11,9 +11,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
- * 
- * </p>
  *
  * @author wychmod
  * @since 2024-08-14

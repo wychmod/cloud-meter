@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @description:
+ * @description: 测试报告保存接口
  * @author: wychmod
  * @date: 2024-10-14
  */
