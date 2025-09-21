@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * 控制器类，用于处理与性能测试用例相关的HTTP请求
  */
 @RestController
-@RequestMapping("api/v1/stress")
+@RequestMapping("api/v1/stress_case")
 public class StressCaseController {
     /**
      * 注入性能测试用例服务类
@@ -29,7 +29,7 @@ public class StressCaseController {
      * @return 返回查询到的用例信息
      */
     @RequestMapping("find")
-    public JsonData findById(@RequestParam("projectId") Long projectId, @RequestParam("caseId") Long caseId){
+    public JsonData findById(@RequestParam("projectId") Long projectId, @RequestParam("id") Long caseId){
         return JsonData.buildSuccess(stressCaseService.findById(projectId,caseId));
     }
 

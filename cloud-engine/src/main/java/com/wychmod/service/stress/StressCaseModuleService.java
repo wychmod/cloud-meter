@@ -6,7 +6,7 @@ import com.wychmod.req.stress.StressCaseModuleUpdateReq;
 
 import java.util.List;
 
-public interface StressCaseModelService {
+public interface StressCaseModuleService {
 
     List<StressCaseModuleDTO> list(Long projectId);
 

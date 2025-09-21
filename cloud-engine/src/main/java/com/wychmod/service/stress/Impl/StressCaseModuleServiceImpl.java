@@ -9,7 +9,7 @@ import com.wychmod.model.StressCaseDO;
 import com.wychmod.model.StressCaseModuleDO;
 import com.wychmod.req.stress.StressCaseModuleSaveReq;
 import com.wychmod.req.stress.StressCaseModuleUpdateReq;
-import com.wychmod.service.stress.StressCaseModelService;
+import com.wychmod.service.stress.StressCaseModuleService;
 import com.wychmod.util.SpringBeanUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class StressCaseModelServiceImpl implements StressCaseModelService {
+public class StressCaseModuleServiceImpl implements StressCaseModuleService {
 
     @Resource
     private StressCaseModuleMapper stressCaseModuleMapper;
