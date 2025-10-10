@@ -5,6 +5,13 @@ import org.apache.jmeter.util.JMeterUtils;
 import java.io.File;
 import java.util.Objects;
 
+
+
+/**
+ * @description: 压测环境初始化工具类
+ * @author: wychmod
+ * @date: 2025-10-1
+ */
 public class StressTestUtil {
 
     /**
@@ -34,7 +41,7 @@ public class StressTestUtil {
     }
 
     /**
-     * 初始化JMeter属性 此处为1
+     * 初始化JMeter环境 此处为1
      * 该方法通过加载JMeter的配置文件并设置一些基本属性来初始化JMeter环境
      * 1. 环境初始化
      * 2. 测试脚本
