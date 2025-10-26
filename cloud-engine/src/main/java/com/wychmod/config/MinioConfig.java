@@ -16,12 +16,24 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "minio")
 public class MinioConfig {
 
+    /**
+     * MinIO服务器地址
+     */
     private String endpoint;
 
+    /**
+     * 访问密钥
+     */
     private String accessKey;
 
+    /**
+     * 秘密密钥
+     */
     private String secretKey;
 
+    /**
+     * 存储桶名称
+     */
     private String bucketName;
 
     @Bean

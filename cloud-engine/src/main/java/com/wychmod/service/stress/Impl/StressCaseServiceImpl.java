@@ -96,7 +96,7 @@ public class StressCaseServiceImpl implements StressCaseService {
             if (jsonData.isSuccess()) {
                 ReportDTO reportDTO = jsonData.getData(ReportDTO.class);
 
-                // 根据测试用例的应力源类型，选择运行简单压力测试或JMX压力测试
+                // 3. 判断压测类型  根据测试用例的应力源类型，选择运行简单压力测试或JMX压力测试
                 if (StressSourceTypeEnum.SIMPLE.name().equalsIgnoreCase(stressCaseDO.getStressSourceType())) {
                     runSimpleStressCase(stressCaseDO, reportDTO);
                 } else if (StressSourceTypeEnum.JMX.name().equalsIgnoreCase(stressCaseDO.getStressSourceType())) {
