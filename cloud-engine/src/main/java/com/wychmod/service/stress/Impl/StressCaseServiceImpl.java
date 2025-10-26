@@ -74,13 +74,13 @@ public class StressCaseServiceImpl implements StressCaseService {
      **/
     @Override
     public void execute(Long projectId, Long caseId) {
-        // 根据项目ID和测试用例ID查询测试用例信息
+        // 1. 查询用例详情
         LambdaQueryWrapper<StressCaseDO> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(StressCaseDO::getProjectId, projectId);
         wrapper.eq(StressCaseDO::getId, caseId);
         StressCaseDO stressCaseDO = stressCaseMapper.selectOne(wrapper);
 
-        // 如果找到对应的测试用例，则创建报告保存请求
+        // 2. 初始化测试报告，如果找到对应的测试用例，则创建报告保存请求
         if (stressCaseDO != null) {
             ReportSaveReq reportSaveReq = ReportSaveReq.builder().projectId(stressCaseDO.getProjectId()).caseId(stressCaseDO.getId())
                     .type(ReportTypeEnum.STRESS.name())
