@@ -30,7 +30,7 @@ public class FileTest {
 
     @Test
     public void testUpload(){
-        String readRemoteUrl = FileUtil.readRemoteUrl("http://117.72.83.9:9000/bucket/1730021495290-1cfefb7b-81fd-4710-8fbd-ff05d74ec36d-credentials.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio_root%2F20241028%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241028T170429Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=55b8d5f32fe2e9217b98fb5c94e0ad6b5c9110aac57a08e326f06bbbb63ad66e");
+        String readRemoteUrl = FileUtil.readRemoteUrl("http://117.72.218.181:9000/bucket/login_form.jmx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=SEKK4MSN9YBKBJC6IY1I%2F20251027%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251027T170653Z&X-Amz-Expires=604800&X-Amz-Security-Token=eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NLZXkiOiJTRUtLNE1TTjlZQktCSkM2SVkxSSIsImV4cCI6MTc2MTYyNzk3NiwicGFyZW50IjoibWluaW9fcm9vdCJ9.GMZdO67gVJF5TkbZ9FPy_20YXXJDcf1bRhV_r-5ObgR6_v_89ENDtc9dyjBFMeI27BGxQsMsIQqU98PBBLBD4w&X-Amz-SignedHeaders=host&versionId=null&X-Amz-Signature=a969d8ba118915fb118127d63aaba2dc152c32a1480c50e44d02b5221328a731");
         System.out.println(readRemoteUrl);
     }
 }
