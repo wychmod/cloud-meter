@@ -4,11 +4,11 @@ import com.wychmod.dto.common.CaseInfoDTO;
 import com.wychmod.enums.TestTypeEnum;
 
 /**
- * @description:
+ * @description: 测试结果发送服务
  * @author: wychmod
  * @date: 2024-11-03
  */
-public interface ResultSendService {
+public interface ResultSenderService {
 
 
     /**

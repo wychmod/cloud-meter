@@ -6,7 +6,7 @@ import com.wychmod.dto.StressSampleResultDTO;
 import com.wychmod.dto.common.CaseInfoDTO;
 import com.wychmod.enums.TestTypeEnum;
 import com.wychmod.model.StressCaseDO;
-import com.wychmod.service.common.ResultSendService;
+import com.wychmod.service.common.ResultSenderService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.jmeter.assertions.AssertionResult;
 import org.apache.jmeter.reporters.ResultCollector;
@@ -26,8 +26,8 @@ import java.util.Map;
 @Slf4j
 public class EngineSampleCollector extends ResultCollector {
 
-    private Map<String, SamplingStatCalculator> calculatorMap = new HashMap<>();
-    private ResultSendService resultSendService;
+    private final Map<String, SamplingStatCalculator> calculatorMap = new HashMap<>();
+    private ResultSenderService resultSenderService;
     private ReportDTO reportDTO;
     private StressCaseDO stressCaseDO;
 
@@ -36,18 +36,21 @@ public class EngineSampleCollector extends ResultCollector {
         super();
     }
 
-    public EngineSampleCollector(ResultSendService resultSendService, ReportDTO reportDTO, StressCaseDO stressCaseDO, Summariser summariser)
+    public EngineSampleCollector(ResultSenderService resultSenderService, ReportDTO reportDTO, StressCaseDO stressCaseDO, Summariser summariser)
     {
         super(summariser);
         this.reportDTO = reportDTO;
-        this.resultSendService = resultSendService;
+        this.resultSenderService = resultSenderService;
         this.stressCaseDO = stressCaseDO;
     }
 
     /**
      * 当样本事件发生时调用此方法
      * 该方法处理样本事件，计算统计信息，并发送结果
-     *
+     * 1. 获取event事件结果
+     * 2. 根据结果的标签，获取对应的采样统计计算器
+     * 3. 创建结果对象，封装采样统计计算器的结果
+     * 4. 将结果转换成json，发送mq
      * @param event 样本事件对象，包含样本数据和事件信息
      */
     @Override
@@ -55,7 +58,7 @@ public class EngineSampleCollector extends ResultCollector {
     {
         super.sampleOccurred(event);
 
-        // 获取事件的结果
+        // 获取event事件结果
         SampleResult result = event.getResult();
 
         // 获取结果的样本标签
@@ -110,6 +113,6 @@ public class EngineSampleCollector extends ResultCollector {
 
         // 创建用例信息对象并发送结果
         CaseInfoDTO caseInfoDTO = new CaseInfoDTO(stressCaseDO.getId(),stressCaseDO.getModuleId(),stressCaseDO.getName());
-        resultSendService.sendResult(caseInfoDTO, TestTypeEnum.STRESS, resultJson);
+        resultSenderService.sendResult(caseInfoDTO, TestTypeEnum.STRESS, resultJson);
     }
 }
