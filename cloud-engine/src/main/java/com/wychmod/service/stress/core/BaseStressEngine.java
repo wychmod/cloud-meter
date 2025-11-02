@@ -1,6 +1,5 @@
 package com.wychmod.service.stress.core;
 
-import com.alibaba.fastjson2.function.impl.ToDouble;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
