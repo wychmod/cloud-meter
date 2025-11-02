@@ -103,7 +103,7 @@ public class EngineSampleCollector extends ResultCollector {
         AssertionResult[] assertionResults = event.getResult().getAssertionResults();
         StringBuilder assertMsg = new StringBuilder();
         for (AssertionResult assertionResult : assertionResults) {
-            assertMsg.append("name").append(assertionResult.getName()).append("msg=").append(assertionResult.getFailureMessage()).append(",");
+            assertMsg.append("name").append(assertionResult.getName()).append(",msg=").append(assertionResult.getFailureMessage()).append(",");
         }
         stressSampleResultDTO.setAssertInfo(assertMsg.toString());
 
