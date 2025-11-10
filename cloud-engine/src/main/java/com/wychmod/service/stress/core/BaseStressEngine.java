@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import com.wychmod.dto.ReportDTO;
 import com.wychmod.model.StressCaseDO;
 import com.wychmod.service.common.ResultSenderService;
+import com.wychmod.service.stress.core.EngineSampleCollector;
 import com.wychmod.util.StressTestUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,10 @@ public abstract class BaseStressEngine {
     private ApplicationContext applicationContext;
 
 
+    /**
+     * 启动压测流程
+     * 执行完整的压测流程，包括初始化引擎、组装测试计划、运行测试、清理资源和更新报告
+     */
     public void startStressTest() {
 
         //初始化测试引擎
@@ -76,6 +81,12 @@ public abstract class BaseStressEngine {
 
     }
 
+    /**
+     * 获取引擎样本收集器
+     * 
+     * @param resultSenderService 结果发送服务
+     * @return EngineSampleCollector 引擎样本收集器实例
+     */
     public EngineSampleCollector getEngineSampleCollector(ResultSenderService resultSenderService) {
         // Summariser对象
         Summariser summer = null;
@@ -95,13 +106,25 @@ public abstract class BaseStressEngine {
 
     }
 
+    /**
+     * 更新测试报告
+     * 测试执行完成后更新相关测试报告信息
+     */
     private void updateReport() {
     }
 
+    /**
+     * 清理数据
+     * 测试执行完成后清理相关资源和数据
+     */
     private void clearData() {
         
     }
 
+    /**
+     * 运行测试
+     * 配置并运行压测引擎
+     */
     private void run() {
         if (Objects.nonNull(this.testPlanHashTree)){
             this.engine.configure(this.testPlanHashTree);
@@ -109,6 +132,10 @@ public abstract class BaseStressEngine {
         }
     }
 
+    /**
+     * 将HashTree保存为JMX文件
+     * 用于调试目的，将测试计划保存为本地JMX文件
+     */
     private void hashTree2Jmx() {
         try {
             StressTestUtil.initJmeterProperties();
@@ -121,9 +148,17 @@ public abstract class BaseStressEngine {
         
     }
 
+    /**
+     * 组装测试计划
+     * 抽象方法，由子类实现具体的测试计划组装逻辑
+     */
     protected abstract void assembleTestPlan();
 
 
+    /**
+     * 初始化压测引擎
+     * 创建并初始化StandardJMeterEngine实例
+     */
     public void initStressEngine() {
         this.engine = StressTestUtil.getJMeterEngine();
     }
